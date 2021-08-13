@@ -3,16 +3,15 @@
 
 
 ======DIRECTIONS======
-If you are trying to run the program, save the files onto your desktop and run it from there.
+* If you are trying to run the program, save the files onto your desktop and run it from there.
 
 
 
 
 ======ABOUT======
-Purpose of this project is to cross-reference files via an input.txt and the files to reference. 
-Ideally, this will display onto the terminal which items were found to be a match, or which items failed to match. 
-I hope to turn this into an actual program with a nice User 
-Interface. (Later tho)
+* Purpose of this project is to cross-reference files via an input.txt and the files to reference. 
+* Ideally, this will display onto the terminal which items were found to be a match, or which items failed to match. 
+* I hope to turn this into an actual program with a nice User Interface. (Later tho)
 
 
 
@@ -35,13 +34,13 @@ Interface. (Later tho)
 
 
 ======LANGUAGE======
-For now, the program will be coded in C++
+* For now, the program will be coded in C++
 
 
 
 
 ======AUTHORS======
-Erik Argueta
+* Erik Argueta
 
 
 
