@@ -51,73 +51,15 @@ int directions() {
 	cout << "(1) Windows\n(2)MacOS\n\n";
 
 	// Windows
+	/*
 	if (OS == 1) {
 		cout << "Please enter the name of your User Profile: ";
 		cin >> userName;
 
 		ifstream input_file;
 		input_file.open("C:/Users/" + userName + "/Documents/EHS-Match/INPUT.txt");
-	}
+	}*/
 	return 0;
-}
-
-void crossRef(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, int& inputSize) {
-	string inSerial;
-	const int BASICSIZE{ 48 };
-	const int XSIZE{ 51 };
-	const int STATESIZE { 59 };
-	
-	for (int indexa{ 0 }; indexa < inputSize; indexa++) {
-		bool xCheck = false;
-		bool bCheck = false;
-		bool sCheck = false;
-		in_file >> inSerial;
-		
-		// EHS-X
-		ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
-		for (int indexb{0}; indexb < XSIZE; indexb++) {
-			string xSN;
-			getline(ehsX, xSN);
-			if (inSerial == xSN) {
-				cout << "EHS-X\n";
-				out_file << inSerial << " == " << xSN << " EHS-X\n";
-				xCheck = true;
-			}
-		}
-		ehsX.close();
-		
-		// STATE
-		state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
-		for (int indexc{0}; indexc < STATESIZE; indexc++) {
-			string stateSN;
-			getline(state, stateSN);
-			if (inSerial == stateSN) {
-				cout << "State\n";
-				out_file << inSerial << " == " << stateSN << " State\n";
-				sCheck = true;
-			}
-		}
-		state.close();
-		
-		// EHS-BASIC
-		ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
-		for (int indexd{0}; indexd < BASICSIZE; indexd++) {
-			string basicSN;
-			getline(ehsB, basicSN);
-			if (inSerial == basicSN) {
-				cout << "Basic\n";
-				out_file << inSerial << " == " << basicSN << " Basic\n";
-				bCheck = true;
-			}
-		}
-		ehsB.close();
-		
-		// Determines if Fed
-		if (xCheck == false && bCheck == false && sCheck == false) {
-			cout << inSerial << " Federal\n";
-			out_file << inSerial << " Federal\n";
-		}
-	}
 }
 
 int enterSize(int& inputSize) {
@@ -142,11 +84,13 @@ void loopProgram(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& st
 }
 
 void openStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file) {
-	in_file.open("/Users/erik-argueta/Desktop/EHS-Match/INPUT.txt");
+	//in_file.open("/Users/erik-argueta/Desktop/EHS-Match/INPUT.txt");
+	in_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/INPUT.txt");
 	if (in_file.fail()) { cout << "INPUT Failed to open\n"; }
 	else { cout << "INPUT file opened successfully.\n"; }
 	
-	out_file.open("/Users/erik-argueta/Desktop/EHS-Match/OUTPUT.txt");
+	//out_file.open("/Users/erik-argueta/Desktop/EHS-Match/OUTPUT.txt");
+	out_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/OUTPUT.txt");
 	if (out_file.fail()) { cout << "output file failed to open.\n"; }
 	else { cout << "output file opened successfully.\n"; }
 	
@@ -162,9 +106,72 @@ void closeStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& s
 	out_file.close();
 }
 
+void crossRef(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, int& inputSize) {
+	string inSerial;
+	const int BASICSIZE{ 48 };
+	const int XSIZE{ 51 };
+	const int STATESIZE { 59 };
+	
+	for (int indexa{ 0 }; indexa < inputSize; indexa++) {
+		bool xCheck = false;
+		bool bCheck = false;
+		bool sCheck = false;
+		in_file >> inSerial;
+		
+		// EHS-X
+		//ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
+		ehsX.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List");
+		for (int indexb{0}; indexb < XSIZE; indexb++) {
+			string xSN;
+			getline(ehsX, xSN);
+			if (inSerial == xSN) {
+				cout << "EHS-X\n";
+				out_file << inSerial << " == " << xSN << " EHS-X\n";
+				xCheck = true;
+			}
+		}
+		ehsX.close();
+		
+		// STATE
+		//state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
+		state.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt");
+		for (int indexc{0}; indexc < STATESIZE; indexc++) {
+			string stateSN;
+			getline(state, stateSN);
+			if (inSerial == stateSN) {
+				cout << "State\n";
+				out_file << inSerial << " == " << stateSN << " State\n";
+				sCheck = true;
+			}
+		}
+		state.close();
+		
+		// EHS-BASIC
+		//ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
+		ehsB.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt");
+		for (int indexd{0}; indexd < BASICSIZE; indexd++) {
+			string basicSN;
+			getline(ehsB, basicSN);
+			if (inSerial == basicSN) {
+				cout << "Basic\n";
+				out_file << inSerial << " == " << basicSN << " Basic\n";
+				bCheck = true;
+			}
+		}
+		ehsB.close();
+		
+		// Determines if Fed
+		if (xCheck == false && bCheck == false && sCheck == false) {
+			cout << inSerial << " Federal\n";
+			out_file << inSerial << " Federal\n";
+		}
+	}
+}
+
 void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, int& inputSize) {
 	ofstream debugger;
-	debugger.open("/Users/erik-argueta/Desktop/EHS-Match/DEBUGGER.txt");
+	//debugger.open("/Users/erik-argueta/Desktop/EHS-Match/DEBUGGER.txt");
+	debugger.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/DEBUGGER.txt");
 	string inSerial;
 	const int BASICSIZE{ 48 };
 	const int XSIZE{ 51 };
@@ -186,7 +193,9 @@ void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 		debugger << "\n=================\n";
 		debugger << "|| EHS-X CHECK ||\n";
 		debugger << "=================\n";
-		ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
+		//ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
+		ehsX.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List");
+
 		for (int indexb{0}; indexb < XSIZE; indexb++) {
 			string xSN;
 			getline(ehsX, xSN);
@@ -202,7 +211,8 @@ void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 		debugger << "\n=====================\n";
 		debugger << "|| EHS-STATE CHECK ||\n";
 		debugger << "=====================\n";
-		state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
+		//state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
+		state.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt");
 		for (int indexc{0}; indexc < STATESIZE; indexc++) {
 			string stateSN;
 			getline(state, stateSN);
@@ -218,7 +228,8 @@ void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 		debugger << "\n=====================\n";
 		debugger << "|| EHS-BASIC CHECK ||\n";
 		debugger << "=====================\n";
-		ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
+		//ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
+		ehsB.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt");
 		for (int indexd{0}; indexd < BASICSIZE; indexd++) {
 			string basicSN;
 			getline(ehsB, basicSN);
