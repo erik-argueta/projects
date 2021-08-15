@@ -4,6 +4,21 @@
 //	sequence of serial numbers
 // Date: 7/26/21
 
+
+
+/*
+
+
+	08/14/21
+	Work has become so convoluted, it is better to implement Class. 
+	Current Issue:
+		I need to make the program close and open the streams in order to cross-reference 
+		more than once. Therefore, I need to implement a class because copying and pasting inString and etc makes the code look messy and complicated.
+		It will also make for review of classes as I can't do that at the moment.
+
+
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,29 +26,32 @@
 using namespace std;
 
 void welcome();
-int directions();
-void openStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file);
-void closeStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file);
+void directions(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file, string& inString, string& xString, string& stateString, string& basicString, string& outString, string& debugString);
+void openStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file, string& inString, string& xString, string& stateString, string& basicString, string& outString, string& debugString);
+void closeStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file);
 void crossRef(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, int& inputSize);
 int enterSize(int& inputSize);
 void loopProgram(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, int& inputSize, bool& endProgram);
-void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, int& inputSize);
+void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, int& inputSize, ofstream& debug_file);
 
 
 int main() {
 	bool endProgram = false;
 	int inputSize;
 	ifstream input_file, ehsX, ehsB, state;
-	ofstream output_file;
-	
-	openStreams(input_file, ehsX, ehsB, state, output_file);
-	
-	//loopProgram(input_file, output_file, inputSize, endProgram);
-	
+	ofstream output_file, debugger_file;
+	string inString, xString, stateString, basicString, outString, debugString;
+
+	welcome();
+	directions(input_file, ehsX, ehsB, state, output_file, debugger_file, inString, xString, stateString, basicString, outString, debugString);
 	enterSize(inputSize);
+
+	debugger(input_file, ehsX, ehsB, state, inputSize, debugger_file);
+
+	//openStreams(input_file, ehsX, ehsB, state, output_file);
+	//loopProgram(input_file, output_file, inputSize, endProgram);
 	//crossRef(input_file, ehsX, ehsB, state, output_file, inputSize);
-	debugger(input_file, ehsX, ehsB, state, inputSize);
-	closeStreams(input_file, ehsX, ehsB, state, output_file);
+	//closeStreams(input_file, ehsX, ehsB, state, output_file, debugger_file);
 	
 	return 0;
 }
@@ -44,22 +62,55 @@ void welcome() {
 	cout << "If you have any questions, please contact Erik Argueta via eargueta@emcsd.org\n\n\n";
 }
 
-int directions() {
+void directions(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file, string& inString, string& xString, string& stateString, string& basicString, string& outString, string& debugString) {
 	int OS;
 	string userName;
+	
 	cout << "Before proceeding, please enter the number representing the Operating System you are currently using.\n\n";
-	cout << "(1) Windows\n(2)MacOS\n\n";
+	cout << "(1) Windows\n(2) MacOS\n\n";
+	//cout << "Enter the Number: ";
+	cin >> OS;
 
 	// Windows
-	/*
 	if (OS == 1) {
 		cout << "Please enter the name of your User Profile: ";
 		cin >> userName;
 
-		ifstream input_file;
-		input_file.open("C:/Users/" + userName + "/Documents/EHS-Match/INPUT.txt");
-	}*/
-	return 0;
+		// Input
+		in_file.open("C:/Users/Josue/Documents/EHS-Match/INPUT.txt");
+		inString = "C:/Users/Josue/Documents/EHS-Match/INPUT.txt";
+		// EHS-X
+		ehsX.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List.txt");
+		xString = "C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List.txt";
+		// State
+		state.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt");
+		stateString = "C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt";
+		// EHS-Basic
+		ehsB.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt");
+		basicString = "C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt";
+		// Output
+		out_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/OUTPUT.txt");
+		outString = "C:/Users/Josue/Desktop/Cross-Referencer-Project/OUTPUT.txt";
+		// Debug
+		debug_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/DEBUGGER.txt");
+		debugString = "C:/Users/Josue/Desktop/Cross-Referencer-Project/DEBUGGER.txt";
+	}
+
+	// Should be MacOS
+	else if (OS == 2) {
+		// Input
+		in_file.open("/Users/" + userName + "/Desktop/EHS-Match/INPUT.txt");
+		// EHS-X
+		ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
+		// State
+		state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
+		// EHS-Basic
+		ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
+		// Output
+		out_file.open("/Users/erik-argueta/Desktop/EHS-Match/OUTPUT.txt");
+		// Debug
+		debug_file.open("/Users/erik-argueta/Desktop/EHS-Match/DEBUGGER.txt");
+	}
 }
 
 int enterSize(int& inputSize) {
@@ -83,27 +134,23 @@ void loopProgram(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& st
 	}
 }
 
-void openStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file) {
-	//in_file.open("/Users/erik-argueta/Desktop/EHS-Match/INPUT.txt");
-	in_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/INPUT.txt");
-	if (in_file.fail()) { cout << "INPUT Failed to open\n"; }
-	else { cout << "INPUT file opened successfully.\n"; }
+void openStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file, string& inString, string& xString, string& stateString, string& basicString, string& outString, string& debugString) {
 	
-	//out_file.open("/Users/erik-argueta/Desktop/EHS-Match/OUTPUT.txt");
-	out_file.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/OUTPUT.txt");
-	if (out_file.fail()) { cout << "output file failed to open.\n"; }
-	else { cout << "output file opened successfully.\n"; }
-	
-	
-	cout << endl << endl << endl << endl;
+	in_file.open(inString);
+	ehsX.open(xString);
+	ehsB.open(basicString);
+	state.open(stateString);
+	out_file.open(outString);
+	debug_file.open(debugString);
 }
 
-void closeStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file) {
+void closeStreams(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, ofstream& debug_file) {
 	in_file.close();
 	ehsX.close();
 	ehsB.close();
 	state.close();
 	out_file.close();
+	debug_file.close();
 }
 
 void crossRef(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, ofstream& out_file, int& inputSize) {
@@ -168,10 +215,10 @@ void crossRef(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 	}
 }
 
-void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, int& inputSize) {
-	ofstream debugger;
+void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state, int& inputSize, ofstream& debug_file) {
+
 	//debugger.open("/Users/erik-argueta/Desktop/EHS-Match/DEBUGGER.txt");
-	debugger.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/DEBUGGER.txt");
+	//debugger.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/DEBUGGER.txt");
 	string inSerial;
 	const int BASICSIZE{ 48 };
 	const int XSIZE{ 51 };
@@ -183,59 +230,59 @@ void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 		bool sCheck = false;
 		in_file >> inSerial;
 		
-		debugger << endl;
-		for (int border { 0 }; border < inSerial.size(); border++) { debugger << "="; }
-		debugger << "||" << inSerial << "||";
-		for (int border { 0 }; border < inSerial.size(); border++) { debugger << "="; }
-		debugger << endl;
+		debug_file << endl;
+		for (int border { 0 }; border < inSerial.size(); border++) { debug_file << "="; }
+		debug_file << "||" << inSerial << "||";
+		for (int border { 0 }; border < inSerial.size(); border++) { debug_file << "="; }
+		debug_file << endl;
 		
 		// EHS-X
-		debugger << "\n=================\n";
-		debugger << "|| EHS-X CHECK ||\n";
-		debugger << "=================\n";
+		debug_file << "\n=================\n";
+		debug_file << "|| EHS-X CHECK ||\n";
+		debug_file << "=================\n";
 		//ehsX.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-X-List.txt");
-		ehsX.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List");
+		//ehsX.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-X-List");
 
 		for (int indexb{0}; indexb < XSIZE; indexb++) {
 			string xSN;
 			getline(ehsX, xSN);
-			debugger << inSerial << " == " << xSN << "\n";
+			debug_file << inSerial << " == " << xSN << "\n";
 			if (inSerial == xSN) {
-				debugger << inSerial << " == " << xSN << " EHS-X\tMATCH\n";
+				debug_file << inSerial << " == " << xSN << " EHS-X\tMATCH\n";
 				xCheck = true;
 			}
 		}
 		ehsX.close();
 		
 		// STATE
-		debugger << "\n=====================\n";
-		debugger << "|| EHS-STATE CHECK ||\n";
-		debugger << "=====================\n";
+		debug_file << "\n=====================\n";
+		debug_file << "|| EHS-STATE CHECK ||\n";
+		debug_file << "=====================\n";
 		//state.open("/Users/erik-argueta/Desktop/EHS-Match/State.txt");
-		state.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt");
+		//state.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/State.txt");
 		for (int indexc{0}; indexc < STATESIZE; indexc++) {
 			string stateSN;
 			getline(state, stateSN);
-			debugger << inSerial << " == " << stateSN << "\n";
+			debug_file << inSerial << " == " << stateSN << "\n";
 			if (inSerial == stateSN) {
-				debugger << inSerial << " == " << stateSN << " State\tMATCH\n";
+				debug_file << inSerial << " == " << stateSN << " State\tMATCH\n";
 				sCheck = true;
 			}
 		}
 		state.close();
 		
 		// EHS-BASIC
-		debugger << "\n=====================\n";
-		debugger << "|| EHS-BASIC CHECK ||\n";
-		debugger << "=====================\n";
+		debug_file << "\n=====================\n";
+		debug_file << "|| EHS-BASIC CHECK ||\n";
+		debug_file << "=====================\n";
 		//ehsB.open("/Users/erik-argueta/Desktop/EHS-Match/EHS-Basic-List.txt");
-		ehsB.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt");
+		//ehsB.open("C:/Users/Josue/Desktop/Cross-Referencer-Project/EHS-Basic-List.txt");
 		for (int indexd{0}; indexd < BASICSIZE; indexd++) {
 			string basicSN;
 			getline(ehsB, basicSN);
-			debugger << inSerial << " == " << basicSN << "\n";
+			debug_file << inSerial << " == " << basicSN << "\n";
 			if (inSerial == basicSN) {
-				debugger << inSerial << " == " << basicSN << " Basic\tMATCH\n";
+				debug_file << inSerial << " == " << basicSN << " Basic\tMATCH\n";
 				bCheck = true;
 			}
 		}
@@ -243,10 +290,10 @@ void debugger(ifstream& in_file, ifstream& ehsX, ifstream& ehsB, ifstream& state
 		
 		// Determines if Fed
 		if (xCheck == false && bCheck == false && sCheck == false) {
-			debugger << "\n===========\n";
-			debugger << "||FEDERAL||\n";
-			debugger << "===========\n";
-			debugger << inSerial << " Federal\n";
+			debug_file << "\n===========\n";
+			debug_file << "||FEDERAL||\n";
+			debug_file << "===========\n";
+			debug_file << inSerial << " Federal\n";
 		}
 	}
 }
