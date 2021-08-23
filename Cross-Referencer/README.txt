@@ -57,5 +57,5 @@ OPTIONAL:
 
 
 ======EXAMPLE======
-
-The debug
+I believe all txt files are already written. You may refer to them and imitate them with your own txt
+files.
