@@ -1,35 +1,47 @@
 ===========|| CROSS-REFERENCER || ===========
 
 
-
-======DIRECTIONS======
-* If you are trying to run the program, save the files onto your desktop and run it from there.
-
-
-
-
 ======ABOUT======
-* Purpose of this project is to cross-reference files via an input.txt and the files to reference. 
-* Ideally, this will display onto the terminal which items were found to be a match, or which items failed to match. 
-* I hope to turn this into an actual program with a nice User Interface. (Later tho)
+Welcome to Cross-Referencer! This projects is meant to help drive project-based learning. I have
+coded it in C++ and would love to have others collaborate with another language!
+
+
+=====SCENARIO=====
+You are assigned to locate devices with specific Serial Numbers. Here, you have a Master List of
+the items' Serial Numbers, and you have several lists of Serial Numbers of items that have been distributed.
+
+Your task is to find how many items have NOT been distributed, and which ones.
+NOTE that there are gaps of empty space in the Master.txt, and that is on purpose. You must consider
+those as an item that is missing, even in the Master List.
 
 
 
 
 ======SPECIFICS======
-- input.txt is the file where the user will insert the specific Serial Numbers they wish to cross-reference.
 
-- output.txt is the file where the (un)matched numbers will be saved with the results.
+First and foremost, you are comparing the schools' list to the master list! This means everything
+will output to the order of the master list. This is to keep consistency.
 
-- The terminal output will display which serial numbers were matched and failed to match.
+There is a directory labeled "Schools". This contains lists of items that have been distributed to
+specific schools.
 
-- DEBUGGER.txt will display all the processes that occur. It should list the user's S/N and the S/N's being cross-referenced.
+missing-items.txt is where a list of missing items' Serial Numbers will be printed.
 
-- EHS-X.txt is one of the list of Serial Numbers
-- Pool.txt is the generic pool of Serial Numbers
-- State.txt is another list of S/N's
-- EHS-Basic.txt is the last list of S/N's
 
+
+OPTIONAL:
+    Debug.txt is a file containing all the work done by the program. This is more for the programmer
+    to make sure the program is working as intended.
+
+    It may enhance the program if the output.txt also displays the distributed Serial Number and the
+    school that it was distributed to
+
+    You may be creative and add additional files for whatever purpose that enhances the program.
+
+
+
+=====NOTES=====
+...
 
 
 
@@ -45,32 +57,5 @@
 
 
 ======EXAMPLE======
-|| input.txt ||
-abcde
-fghijkl
-mnop
 
-
-|| Terminal ||
-Welcome to the Cross-Referencer! 
-Cross-Referencing the files from: input/txt
-with *insert the name of the txt files being referenced*
-.
-.
-.
-.
-abcde == MATCH
-fghijkl == FAILED
-mnop == FAILED
-
-
-|| debugger.txt ||
-abcde == abcdf
-abcde == abcdg
-abcde == abcdh
-...
-
-|| output.txt || 
-abcde == MATCH
-fghijkl == FAILED
-mnop == FAILED
+The debug
