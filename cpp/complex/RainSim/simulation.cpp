@@ -5,10 +5,11 @@
 //  Created by Erik Argueta on 12/6/21.
 //
 
-#include "simulation.h"
+#include "Simulation.h"
 #include <iostream>
 #include <array>
-#include <ctime>
+#include <time.h>
+#include <stdlib.h>
 #include <random>
 
 Simulation::Simulation() : length(0), height(0), chances(0) { }
@@ -99,14 +100,20 @@ void Simulation::printCredits() {
 void Simulation::print() {
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int> distribution(1, 100);
+	
 	int spot;
 	std::cout << std::endl;
+	
 	for (int i = 0; i < (length*2)+3; i++) { std::cout <<"_"; }
+	
 	std::cout << std:: endl;
+	srand(static_cast<int>(time(NULL)));
 	for (int i = 0; i < height; i++) {
 		std::cout << "| ";
 		for (int j = 0; j < length; j++) {
-			spot = distribution(generator);
+			//spot = distribution(generator);
+			
+			spot = 1+rand()%100;
 			if (spot <= chances) { std::cout << "* "; }
 			else { std::cout << ". "; }
 		}

@@ -7,9 +7,8 @@
 //		Maybe incorporate OOP
 //
 #include <iostream>
-#include <ctime>
 #include <random>
-#include "simulation.h"
+#include "Simulation.h"
 using namespace std;
 
 void welcome();
