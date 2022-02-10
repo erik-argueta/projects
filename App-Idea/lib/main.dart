@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
             backgroundColor: const Color.fromARGB(255, 54, 57, 63),
             appBar: AppBar(
-              backgroundColor: Color.fromARGB(255, 204, 0, 0),
+              //backgroundColor: const Color.fromARGB(255, 204, 0, 0),
+              backgroundColor: Colors.green,
               centerTitle: true,
               title: const Text('Select a Language'),
             )));
