@@ -75,7 +75,7 @@ class LanguageScreen extends StatelessWidget {
                 ),
                 // Within the 'LanguageScreen' widget
                 onPressed: () {
-                  // Navigate to teh second screen using a named route
+                  // Navigate to the second screen using a named route
                   Navigator.pushNamed(context, '/engl');
                 },
                 child: const Text('English'),

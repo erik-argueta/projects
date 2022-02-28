@@ -10,14 +10,14 @@ class EnglishMain extends StatelessWidget {
       home: Scaffold(
         backgroundColor: CustomTheme.basicTheme.scaffoldBackgroundColor,
         appBar: AppBar(
-          leadingWidth: 30,
+          leadingWidth: 28,
           backgroundColor: CustomTheme.basicTheme.primaryColor,
-          leading: IconButton(
+          /*leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new),
             onPressed: () {
               Navigator.pop(context);
             },
-          ),
+          ),*/
           title: const Text(
             'Please Select a Category',
             style: TextStyle(
@@ -30,7 +30,7 @@ class EnglishMain extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // Vaccination Sites [currently the Go-Back button]
+              // Vaccination Sites
               ElevatedButton(
                 style: testing,
                 child: const Text('Vaccination Sites'),
