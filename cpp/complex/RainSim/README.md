@@ -2,7 +2,7 @@
 ### <i> What do you mean the chances of rain doesn't mean whether or not it will rain?? </i>
 
 ### Description
-Did you know: The percentage of rain predicted means it will rain in that percent of the area.
+Did you know the percentage of rain predicted means it will rain in that percent of the area?
 * It may not make sense, but this program aims to help visualize such fact.
 * Here, the user enters the dimensions of the area and the percent of rain. 
 * Using a random number generator, the program will place an asteriks (*) on a cell that will experience rain.
