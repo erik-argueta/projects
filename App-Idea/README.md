@@ -1,10 +1,11 @@
 # El Monte Notifier
 ### Helping our community with one mobile device at a time
 
-### Special Note: This app won't store any private, personal information. The purpose is to bridge the disconnect between local government events and the residents.
-
-<br /> 
+**Special Note: This app won't store any private, personal information. The purpose is to bridge the disconnect between local government events and the residents**
 <br />
+
+I am documenting my experience in this project! So stay tuned for uploads!
+
 
 
 ## Description
@@ -30,7 +31,6 @@ The app will be available in these popular languages in the community:
 - Mandarin
 - Vietnamese
 
-<br />
 <br />
 
 ## Why Do We Need This App?
