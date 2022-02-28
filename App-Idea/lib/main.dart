@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'languagesEN/english/english_main.dart';
+import 'languagesEN/english/vax_sites_en.dart';
+import 'themes/custom_theme.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: MyApp(),
+    MaterialApp(
+      title: 'Testing Routes',
+      initialRoute: '/',
+      // Start the app with "/" route, build the LanguageScreen widget.
+      routes: {
+        '/': (context) => const LanguageScreen(),
+        // when navigating to the "/second" route, build the EnglishBuild
+        '/engl': (context) => const EnglishMain(),
+        // Vax Sites Route
+        '/vaxSites': (context) => const VaccinationSites(),
+      },
     ),
   );
 }
@@ -23,23 +35,25 @@ void main() {
   - Find way to cycle the [Please Select a Language]
 */
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class LanguageScreen extends StatelessWidget {
+  const LanguageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Language Selection',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 54, 57, 63),
-        colorScheme:
-            ColorScheme.fromSwatch(primarySwatch: Colors.green).copyWith(
-          secondary: Colors.green,
-        ),
-      ),
+      theme: CustomTheme.basicTheme,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Please Select a Language'),
+          centerTitle: true,
+          backgroundColor: CustomTheme.basicTheme.primaryColor,
+          title: const Text(
+            'Please Select a Language',
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ),
         body: Center(
           child: Column(
@@ -48,31 +62,52 @@ class MyApp extends StatelessWidget {
               // ENGLISH
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: CustomTheme.basicTheme.primaryColor,
                   padding: const EdgeInsets.only(
+                    top: 15,
+                    bottom: 15,
                     left: (46.5),
                     right: (46.5),
                   ),
-                  textStyle: const TextStyle(fontSize: 30),
+                  textStyle: const TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
-                onPressed: () {},
+                // Within the 'LanguageScreen' widget
+                onPressed: () {
+                  // Navigate to teh second screen using a named route
+                  Navigator.pushNamed(context, '/engl');
+                },
                 child: const Text('English'),
               ),
+              const SizedBox(height: 50),
+
               // SPANISH
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: CustomTheme.basicTheme.primaryColor,
                   padding: const EdgeInsets.only(
+                    top: 15,
+                    bottom: 15,
                     left: (42),
                     right: (42),
                   ),
-                  textStyle: const TextStyle(fontSize: 30),
+                  textStyle: const TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
                 onPressed: () {},
                 child: const Text('Espanol'),
               ),
+              const SizedBox(height: 50),
+
               // MANDARIN
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: CustomTheme.basicTheme.primaryColor,
                   padding: const EdgeInsets.only(
+                    top: 15,
+                    bottom: 15,
                     left: 32,
                     right: 32,
                   ),
@@ -81,9 +116,18 @@ class MyApp extends StatelessWidget {
                 onPressed: () {},
                 child: const Text('Mandarin'),
               ),
+              const SizedBox(height: 50),
+
               // VIETNAMESE
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: CustomTheme.basicTheme.primaryColor,
+                  padding: const EdgeInsets.only(
+                    top: 15,
+                    bottom: 15,
+                    left: 16,
+                    right: 16,
+                  ),
                   textStyle: const TextStyle(fontSize: 30),
                 ),
                 onPressed: () {},
