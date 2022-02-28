@@ -1,41 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:macbook_el_monte/main-pages/test-sites-repo/test_sites.dart';
-import 'main-pages/vax-sites-repo/vax_sites.dart';
-import 'themes/custom_theme.dart';
+import 'package:macbook_el_monte/themes/custom_theme.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Testing Routes',
-      initialRoute: '/',
-      // Start the app with "/" route, build the LanguageScreen widget.
-      routes: {
-        '/': (context) => const EnglishMainMenu(),        // Vax Sites Route
-        '/vaxSites': (context) => const VaccinationSites(),
-        '/testSites': (context) => const TestSites(),
-
-      },
-    ),
-  );
-}
-
-/*
-
-  
-  - Begin Navigation Set-up
-      * Language-Page [Only show up at first initialization of the app]
-      * Main Menu
-      * Vacc Sites
-      * Test Sites
-      * Food Drive
-      * Town Halls
-      * Settings -> Change language?
-      
-  - Find way to cycle the [Please Select a Language]
-*/
-
-class EnglishMainMenu extends StatelessWidget {
-  const EnglishMainMenu({Key? key}) : super(key: key);
+class EnglishMain extends StatelessWidget {
+  const EnglishMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +42,7 @@ class EnglishMainMenu extends StatelessWidget {
 
               // Test Sites
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/testSites');
-                },
+                onPressed: () {},
                 style: basicButton,
                 child: const Text('Testing Sites'),
               ),
