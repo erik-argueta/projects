@@ -1,0 +1,6 @@
+This file is where the user inputs the Serial Number or Reference Number(s).
+
+Example:
+21-3213
+20-4212
+HBA123N1JI22
